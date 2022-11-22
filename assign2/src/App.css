@@ -1,5 +1,12 @@
 .App {
+  max-width: 860px;
+  margin: 40px auto;
   text-align: center;
-  display: flex;
-  flex-direction: row;
+}
+
+.card-grid {
+  margin-top: 45px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
 }
