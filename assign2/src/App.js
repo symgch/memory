@@ -54,7 +54,8 @@ function App() {
         })
         resetTurn()
       } else {
-        resetTurn()
+        // give it some time
+        setTimeout(() => resetTurn(), 800)
       }
     }
   }, [selectOne, selectTwo])
