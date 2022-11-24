@@ -17,6 +17,7 @@ function App() {
   const [selectOne, setSelectOne] = useState(null)
   const [selectTwo, setSelectTwo] = useState(null)
 
+  // Shuffle function
   const shuffle = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
@@ -39,10 +40,20 @@ function App() {
     if (selectOne && selectTwo) { 
       // do the pictures(src) match each other
       if (selectOne.src === selectTwo.src) {
-        console.log("Match")
+        setCards(prevCard => {
+          // return new array
+          return prevCard.map(card => {
+            // Does the matched image(src) match them
+            if (card.src === selectOne.src) {
+              // They're a match!
+              return {...card, match: true}
+            } else {
+              return card
+            }
+          })
+        })
         resetTurn()
       } else {
-        console.log("Not a Match")
         resetTurn()
       }
     }
@@ -69,6 +80,8 @@ function App() {
           <Card key={card.id} 
                 card={card}
                 handleChoice={handleChoice} 
+                // Flipping the first card, second card, and if theyre a match
+                flipped={card === selectOne || card === selectTwo || card.match}
           />
         ))}
       </div>
