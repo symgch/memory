@@ -23,6 +23,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }))
     
+    setSelectOne(null)
+    setSelectTwo(null)
     setCards(shuffledCards)
     setTurns(0)
   }
@@ -67,7 +69,12 @@ function App() {
     // Adding up the turns using recursion
     setTurns(prevTurn => prevTurn + 1)
   }
-  // const cardValues = ["Card1", "Card2", "Card3", "Card4", "Card5", "Card6", "Card7", "Card8"];
+  
+  // Starting Game 
+  useEffect(() => {
+    shuffle()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="App">
@@ -75,6 +82,8 @@ function App() {
       <div className="container"></div>
       {/* {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))} */}
       <button onClick={shuffle}>New Game</button>
+
+      <p>Turns: {turns}</p>
 
       <div className="card-grid">
         {cards.map(card => (
