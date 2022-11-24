@@ -17,11 +17,14 @@ function App() {
   const [selectOne, setSelectOne] = useState(null)
   const [selectTwo, setSelectTwo] = useState(null)
 
+  // Shuffle function
   const shuffle = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }))
     
+    setSelectOne(null)
+    setSelectTwo(null)
     setCards(shuffledCards)
     setTurns(0)
   }
@@ -39,11 +42,22 @@ function App() {
     if (selectOne && selectTwo) { 
       // do the pictures(src) match each other
       if (selectOne.src === selectTwo.src) {
-        console.log("Match")
+        setCards(prevCard => {
+          // return new array
+          return prevCard.map(card => {
+            // Does the matched image(src) match them
+            if (card.src === selectOne.src) {
+              // They're a match!
+              return {...card, match: true}
+            } else {
+              return card
+            }
+          })
+        })
         resetTurn()
       } else {
-        console.log("Not a Match")
-        resetTurn()
+        // give it some time
+        setTimeout(() => resetTurn(), 800)
       }
     }
   }, [selectOne, selectTwo])
@@ -55,7 +69,12 @@ function App() {
     // Adding up the turns using recursion
     setTurns(prevTurn => prevTurn + 1)
   }
-  // const cardValues = ["Card1", "Card2", "Card3", "Card4", "Card5", "Card6", "Card7", "Card8"];
+  
+  // Starting Game 
+  useEffect(() => {
+    shuffle()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="App">
@@ -64,11 +83,15 @@ function App() {
       {/* {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))} */}
       <button onClick={shuffle}>New Game</button>
 
+      <p>Turns: {turns}</p>
+
       <div className="card-grid">
         {cards.map(card => (
           <Card key={card.id} 
                 card={card}
                 handleChoice={handleChoice} 
+                // Flipping the first card, second card, and if theyre a match
+                flipped={card === selectOne || card === selectTwo || card.match}
           />
         ))}
       </div>
