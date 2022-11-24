@@ -80,7 +80,6 @@ function App() {
     <div className="App">
       <h1>Memory Game</h1>
       <div className="container"></div>
-      {/* {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))} */}
       <button onClick={shuffle}>New Game</button>
 
       <p>Turns: {turns}</p>
