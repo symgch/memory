@@ -1,5 +1,19 @@
 .App {
+  max-width: 860px;
+  margin: 40px auto;
   text-align: center;
-  display: flex;
-  flex-direction: row;
+}
+
+.card-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px; 
+}
+
+.card-grid img{
+  float: left;
+  width:  180px;
+  height: 220px;
+  background-size: cover;
 }

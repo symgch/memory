@@ -1,34 +1,51 @@
 import './App.css';
 import Card from './Card'
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
+import { useState } from 'react'
 
 function App() {
-  const cardValues = ["Card1", "Card2", "Card3", "Card4"];
+  const cardImages = [
+    { "src": "/img/bulb-1.jpg" },
+    { "src": "/img/city-1.jpg" },
+    { "src": "/img/horizon-1.jpg" },
+    { "src": "/img/hotair-1.jpg" },
+    { "src": "/img/parrot-1.jpg" },
+    { "src": "/img/snow-1.jpg" }
+  ]
+
+  const [cards, setCards] = useState([])
+  const [turns, setTurns] = useState(0)
+
+  const shuffle = () => {
+    const shuffledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }))
+    
+    setCards(shuffledCards)
+    setTurns(0)
+  }
+
+  console.log(cards, turns)
+
+  // const cardValues = ["Card1", "Card2", "Card3", "Card4", "Card5", "Card6", "Card7", "Card8"];
+
   return (
     <div className="App">
-      {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))}
+      <h1>Memory Game</h1>
+      <div className="container"></div>
+      {/* {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))} */}
+      <button onClick={shuffle}>New Game</button>
+
+      <div className="card-grid">
+        {cards.map(card => (
+          <div className="card" key={card.id}>
+            <div>
+              <img className="front" src={card.src} alt="card front" />
+              <img className="back" src="/img/question-1.jpg" alt="card back" />
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
