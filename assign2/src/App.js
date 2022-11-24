@@ -2,7 +2,6 @@ import './App.css';
 import Card from './components/Card'
 import { useState, useEffect } from 'react'
 
-// Making sure the push is working
 function App() {
   const cardImages = [
     { "src": "/img/bulb-1.jpg", match: false },
