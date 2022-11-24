@@ -16,12 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aquamarine;
+  background-color: rgb(7, 20, 52);
 }
 
-/* .container {
-  height: 700px;
-  width: 700px;
-  background-color: antiquewhite;
-} */
 
